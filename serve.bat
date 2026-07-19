@@ -2,7 +2,7 @@
 setlocal EnableExtensions
 cd /d "%~dp0"
 
-echo Starting ExorcistGame2046...
+echo Starting patched ExorcistGame2046 server...
 echo.
 
 where powershell.exe >nul 2>nul
@@ -11,23 +11,17 @@ if not errorlevel 1 (
     if not errorlevel 1 goto :eof
 )
 
-echo PowerShell server failed. Trying Python fallback...
-where py.exe >nul 2>nul
+echo PowerShell server failed. Trying Node.js fallback...
+where node.exe >nul 2>nul
 if not errorlevel 1 (
-    start "" "http://localhost:8080/play.html"
-    py.exe -3 -m http.server 8080 --bind 127.0.0.1
-    goto :eof
-)
-
-where python.exe >nul 2>nul
-if not errorlevel 1 (
-    start "" "http://localhost:8080/play.html"
-    python.exe -m http.server 8080 --bind 127.0.0.1
+    start "" "http://localhost:8080/"
+    node.exe "%~dp0scripts\server.mjs"
     goto :eof
 )
 
 echo.
-echo ERROR: Could not start the local server.
-echo Install Python or run npm start if Node.js is installed.
+echo ERROR: Patched server could not start.
+echo Windows PowerShell or Node.js is required.
+echo Do not use a plain Python static server for this build: it will not inject the runtime repair.
 echo.
 pause
