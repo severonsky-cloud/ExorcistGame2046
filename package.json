@@ -1,0 +1,10 @@
+{
+  "name": "exorcistgame2046",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Two-player browser co-op immersive sim prototype set in Rostov 2046.",
+  "scripts": {
+    "serve": "python3 -m http.server 8080",
+    "check": "node scripts/smoke-check.mjs"
+  }
+}
